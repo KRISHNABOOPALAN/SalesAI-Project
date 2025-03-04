@@ -141,3 +141,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALLOWED_IPS = [
     '0.0.0.0/0',  # Example IP range
 ]
+
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'db': {
+            'level': 'DEBUG',
+            'class': 'MYAPP.logging_handlers.DatabaseLogHandler',  # Update to match your app name
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['db', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'MYAPP': {
+            'handlers': ['db', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
